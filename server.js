@@ -101,6 +101,12 @@ io.on("connection", (socket) => {
     console.log(`📨 update-panel → ${roomId}: ${panel}`);
   });
 
+// 🏅 AGGIUNTA — medaglie multiplayer
+socket.on("found-medal", ({ roomId, medaglia }) => {
+  socket.to(roomId).emit("found-medal", { medaglia });
+  console.log(`🏅 Medaglia inviata → ${roomId}: ${medaglia}`);
+});
+
   // 🔤 Host invia una scelta (A/B)
   socket.on("choice", ({ roomId, value }, ack) => {
     socket.to(roomId).emit("choice", { value });
